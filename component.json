@@ -1,0 +1,17 @@
+{
+  "name": "replace-text",
+  "repo": "automattic/replace-text",
+  "description": "replace text within an element",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "matthewmueller/dom-iterator": "0.2.0",
+    "component/domify": "1.2.2"
+  },
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
