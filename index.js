@@ -39,6 +39,7 @@ function replace(parent, match, fn) {
   var it = iterator(parent.firstChild, parent).select(3).revisit(false);
   var node = it.node;
   var cursor = 0;
+  var range;
   var val;
   var len;
   var i;
@@ -72,13 +73,8 @@ function replace(parent, match, fn) {
 
     node = it.next();
   }
-  
 
-  // get the ranges
-  var range;
-  var el;
-
-  // create ranges from the matched text
+  // create ranges from the textnodes
   for (i = 0, m; m = ms[i]; i++) {
     range = document.createRange();
     range.setStart(m.start.node, m.start.offset);
