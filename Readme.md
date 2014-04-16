@@ -53,7 +53,7 @@ p.innerHTML // Welcome to <mark><a href="http://automattic.com">automattic.com</
 
 ### `replace(el, match, replacement)`
 
-Replace all occurences of `match` in `el` with `replacement`. `match` may be a string or a `regexp`. Replacement may be a string, element, or function.
+Replace all occurences of `match` in `el` with `replacement`. `match` may be a string or a regexp. Replacement may be a string, element, or function.
 
 If you pass a function as the replacement, the signature is as follows: `replacement(match, range, [fn])`. `replace-text` uses the return value of the function to do the replacement. The return value can be an element or string.
 
