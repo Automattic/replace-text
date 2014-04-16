@@ -11,7 +11,7 @@
 
 ## Examples
 
-### Replace text:
+**Replace text:**
 
 ```js
 var p = document.createElement('p');
@@ -20,7 +20,7 @@ replace(p, 'all', 'ALL')
 p.innerHTML // Not <u>ALL</u> that glitters is gold
 ```
 
-### Preserve HTML:
+**Preserve HTML:**
 
 ```js
 var p = document.createElement('p');
@@ -33,7 +33,7 @@ replace(p, 'wander', function(m, range) {
 p.innerHTML // Not <u>all</u> those who <u><mark>wan</mark>der</u> are lost
 ```
 
-### Autolink:
+**Autolink:**
 
 ```js
 var p = document.createElement('p');
