@@ -23,74 +23,43 @@ function replace(parent, match, fn) {
   match = match.source ? match : new RegExp('\\b' + match + '\\b', 'gi');
   fn = 'function' == typeof fn ? fn : wrap(fn);
   var text = parent.textContent;
-  var ms = [];
 
   // need global for exec to work correctly
   match = match.global ? match : addGlobal(match);
-  
+
   while ((m = match.exec(text)) != null) {
-    m._index = m.index;
-    m.offset = m.index + m[0].length;
-    ms.push(m);
-  }
+    var index = m.index;
+    var offset = m.index + m[0].length;
+    var it = iterator(parent.firstChild, parent).select(3).revisit(false);
+    var node = it.node;
+    var start = {};
+    var end = {};
+    var val, len;
 
-  if (!ms.length) return parent;
+    while (node) {
+      val = node.nodeValue;
+      len = val.length;
 
-  // set up the iterator
-  var it = iterator(parent.firstChild, parent).select(3).revisit(false);
-  var node = it.node;
-  var cursor = 0;
-  var val;
-  var len;
-  var i;
-
-  // walk through the nodes, marking
-  // nodes at the matched text offsets.
-  while (node) {
-    val = node.nodeValue;
-    len = val.length;
-
-    for (i = 0, m; m = ms[i]; i++) {
-      if (!m.start && len > m._index) {
-        m.start = {
-          node: node,
-          offset: m._index
-        };
+      if (!start.node && len > index) {
+        start.node = node;
+        start.offset = index;
       }
 
-      // check the end
-      if (!m.end && len >= m.offset) {
-        m.end = {
-          node: node,
-          offset: m.offset
-        }
+      if (!end.node && len >= offset) {
+        end.node = node;
+        end.offset = offset;
       }
 
-      // update the index and offset
-      m._index -= len;
-      m.offset -= len;
+      index -= len;
+      offset -= len;
+      node = it.next();
     }
 
-    node = it.next();
-  }
-  
-
-  // get the ranges
-  var range;
-  var el;
-
-  // create ranges from the matched text
-  for (i = 0, m; m = ms[i]; i++) {
-    range = document.createRange();
-    range.setStart(m.start.node, m.start.offset);
-    range.setEnd(m.end.node, m.end.offset);
-
-    // cleanup match object
-    delete m._index;
-    delete m.offset;
-    delete m.start;
-    delete m.end;
-
+    // create the range from the start and end offsets
+    var range = document.createRange();
+    range.setStart(start.node, start.offset);
+    range.setEnd(end.node, end.offset);
+    
     // replace with match. async or sync depending on function signature
     3 == fn.length ? fn(m, range, update) : update(fn(m, range));
 
@@ -101,6 +70,9 @@ function replace(parent, match, fn) {
       range.deleteContents();
       range.insertNode(el);
     }
+
+    // update the text
+    text = parent.textContent;
   }
 
   return parent;
