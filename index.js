@@ -36,6 +36,12 @@ function replace(parent, match, fn) {
     var end = {};
     var val, len;
 
+    // ensure node is a textnode
+    //
+    // TODO: figure out a better way to do this
+    // within dom-iterator
+    node = 3 == node.nodeType ? node : it.next();
+
     while (node) {
       val = node.nodeValue;
       len = val.length;
