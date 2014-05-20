@@ -23,6 +23,7 @@ function replace(parent, match, fn) {
   match = match.source ? match : new RegExp('\\b' + match + '\\b', 'gi');
   fn = 'function' == typeof fn ? fn : wrap(fn);
   var text = parent.textContent;
+  var range;
 
   // need global for exec to work correctly
   match = match.global ? match : addGlobal(match);
@@ -62,23 +63,23 @@ function replace(parent, match, fn) {
     }
 
     // create the range from the start and end offsets
-    var range = document.createRange();
+    range = document.createRange();
     range.setStart(start.node, start.offset);
     range.setEnd(end.node, end.offset);
-    
+
     // replace with match. async or sync depending on function signature
     3 == fn.length ? fn(m, range, update) : update(fn(m, range));
 
-    // update the range with the returned element
-    function update(el) {
-      if (!el) return;
-      el = el.nodeType ? el : domify(el);
-      range.deleteContents();
-      range.insertNode(el);
-    }
-
     // update the text
     text = parent.textContent;
+  }
+
+  // update the range with the returned element
+  function update(el) {
+    if (!el) return;
+    el = el.nodeType ? el : domify(el);
+    range.deleteContents();
+    range.insertNode(el);
   }
 
   return parent;
