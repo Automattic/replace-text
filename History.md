@@ -1,8 +1,14 @@
 
+0.0.6 / 2014-06-30
+==================
+
+ * add `package.json` file
+ * component: update "dom-iterator" to v0.2.1
+
 0.0.5 / 2014-05-20
 ==================
 
-  * fix bug in firefox
+ * fix bug in firefox
 
 0.0.4 / 2014-05-09
 ==================

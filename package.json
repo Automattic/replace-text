@@ -1,10 +1,10 @@
 {
   "name": "replace-text",
   "description": "replace text within an element",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "keywords": [],
   "dependencies": {
-    "dom-iterator": "0.2.1"
+    "dom-iterator": "0.2.1",
     "domify": "1.2.2"
   },
   "license": "MIT",
