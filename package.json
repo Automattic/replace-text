@@ -1,0 +1,21 @@
+{
+  "name": "replace-text",
+  "description": "replace text within an element",
+  "version": "0.0.5",
+  "keywords": [],
+  "dependencies": {
+    "dom-iterator": "0.2.1"
+    "domify": "1.2.2"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "component": {
+    "scripts": {
+      "replace-text/index.js": "index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Automattic/replace-text.git"
+  }
+}
