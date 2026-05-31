@@ -4,7 +4,7 @@
   "version": "0.0.7",
   "keywords": [],
   "dependencies": {
-    "dom-iterator": "0.3.0",
+    "dom-iterator": "1.0.1",
     "domify": "1.3.0"
   },
   "license": "MIT",
